@@ -1,24 +1,30 @@
 {
-  "name": "teste-tecnico-shopper",
-  "version": "1.0.0",
-  "description": "technical teste shopper aplication",
-  "main": "index.js",
-  "repository": "https://github.com/asafebxd/teste-tecnico-shopper",
-  "author": "Asafe Alves",
-  "license": "MIT",
-  "private": false,
-  "dependencies": {
-    "express": "^4.19.2",
-    "glob": "^11.0.0",
-    "rimraf": "^6.0.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.9.1",
-    "@types/express": "^4.17.21",
-    "eslint": "^9.9.1",
-    "globals": "^15.9.0",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.3.0"
-  }
+    "name": "teste-tecnico-shopper",
+    "version": "1.0.0",
+    "description": "technical teste shopper aplication",
+    "main": "index.js",
+    "repository": "https://github.com/asafebxd/teste-tecnico-shopper",
+    "author": "Asafe Alves",
+    "license": "MIT",
+    "private": false,
+    "scripts": {
+        "start": "ts-node-dev ./src/index.ts"
+    },
+    "dependencies": {
+        "@google/generative-ai": "^0.17.1",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "glob": "^11.0.0",
+        "http-status-codes": "^2.3.0",
+        "rimraf": "^6.0.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.9.1",
+        "@types/express": "^4.17.21",
+        "eslint": "^9.9.1",
+        "globals": "^15.9.0",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^8.3.0"
+    }
 }
