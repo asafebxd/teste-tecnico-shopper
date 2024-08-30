@@ -23,8 +23,7 @@ export const confirmMeasure = async (req: Request, res: Response) => {
             });
         }
 
-        const alreadyConfirmed = measure.has_confirmed;
-        if (alreadyConfirmed) {
+        if (measure.has_confirmed) {
             return res.status(StatusCodes.CONFLICT).json({
                 error_code: "CONFIRMATION_DUPLICATE",
                 error_description: "Measure already confirmed",

@@ -1,10 +1,9 @@
 export interface IRecords {
-    id: number;
+    measure_uuid: string;
     image: string;
     customer_code: string;
-    measure_time: Date;
+    measure_datetime: string;
     measure_type: "WATER" | "GAS";
-    measure_value: number;
     has_confirmed: boolean;
-    measure_uuid: string;
+    measure_value: number;
 }

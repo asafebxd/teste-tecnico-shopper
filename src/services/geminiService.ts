@@ -23,11 +23,10 @@ export const analyzeImage = async (imageBase64: string) => {
                 text: `
                 Extract the following details from this meter image:
                 - image_link: The link to the uploaded image
-                - customer_code: The code of the customer
-                - measure_time: The time of the measurement
-                - measure_type: The type of the measurement (WATER or GAS)
-                - measure_value: The numeric value of the measurement
-                - measure_uuid: A unique identifier for the measurement
+                - customer_code: located at "Cod. Cliente"
+                - measure_datetime: locatedat "Data da apresentacao" de "leitura atual"
+                - measure_type: indentify if the bill is (WATER or GAS)
+                - measure_value: located at "Leitura Atual m3" or "Consumo m3"
                 `,
             },
         ]);

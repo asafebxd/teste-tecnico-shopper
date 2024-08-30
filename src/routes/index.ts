@@ -13,9 +13,11 @@ routes.get("/", (_, res) => {
 });
 
 routes.post("/upload", uploadController.uploadImage);
-routes.post("/measures", measureController.getMeasure);
-routes.post("/confirm", confirmController.confirmMeasure);
+routes.patch("/confirm", confirmController.confirmMeasure);
+routes.get("/:customer_code/list", measureController.getMeasure);
+
 routes.get("/records", recordscontroller.listRecords);
+
 routes.get("/records/filter", recordscontroller.filterRecords);
 
 routes.get("/image/:id", (req, res) => {

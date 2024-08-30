@@ -11,7 +11,9 @@ const getEnvironment = () => {
             return development;
 
         default:
-            return development;
+            throw new Error(
+                "NODE_ENV must have on of these values (production, test, development)"
+            );
     }
 };
 
