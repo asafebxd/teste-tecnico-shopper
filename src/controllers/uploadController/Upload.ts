@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { StatusCodes } from "http-status-codes";
 // import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as yup from "yup";
-import knex from "knex";
+import { Knex } from "../../database/knex";
 
 // const genAI = new GoogleGenerativeAI(process.env.API_KEY ?? "");
 
@@ -48,7 +48,7 @@ export const uploadImage = async (req: Request, res: Response) => {
         const measure_time = new Date();
         const measure_uuid = uuidv4();
 
-        await knex("records").insert({
+        await Knex("records").insert({
             image,
             customer_code,
             measure_time,

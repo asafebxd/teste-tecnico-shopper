@@ -10,6 +10,7 @@ export async function up(knex: Knex) {
             table.dateTime("measure_time");
             table.enu("measure_type", ["WATER", "GAS"]);
             table.integer("measure_value");
+            table.boolean("has_confirmed").defaultTo(false);
             table.string("measure_uuid").unique();
 
             table.comment(

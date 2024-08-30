@@ -1,1 +1,3 @@
-export * from "./endRoutes";
+export * from "./uploadController";
+export * from "./measureController";
+export * from "./confirmController";
