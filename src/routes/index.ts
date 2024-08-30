@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
     confirmController,
     measureController,
+    recordscontroller,
     uploadController,
 } from "../controllers";
 
@@ -14,6 +15,8 @@ routes.get("/", (_, res) => {
 routes.post("/upload", uploadController.uploadImage);
 routes.post("/measures", measureController.getMeasure);
 routes.post("/confirm", confirmController.confirmMeasure);
+routes.get("/records", recordscontroller.listRecords);
+routes.get("/records/filter", recordscontroller.filterRecords);
 
 routes.get("/image/:id", (req, res) => {
     const image = Buffer.from(
@@ -28,31 +31,5 @@ routes.get("/image/:id", (req, res) => {
 
     res.end(image);
 });
-
-// routes.patch("/confirm", async (req: Request, res: Response) => {
-//     try {
-//         const { measure_uuid, confirmed_value } = req.body;
-
-//         if (!measure_uuid || !confirmed_value) {
-//             return res
-//                 .status(StatusCodes.BAD_REQUEST)
-//                 .json({ error: "INVALID_DATA" });
-//         }
-
-//         const userRead = false;
-//         if (userRead) {
-//             return res
-//                 .status(StatusCodes.CONFLICT)
-//                 .json({ error: "DOUBLE_REPORT" });
-//         }
-
-//         res.status(StatusCodes.ACCEPTED).json("OK");
-//     } catch (error) {
-//         console.error("Error during image processing:", error);
-//         res.status(StatusCodes.BAD_GATEWAY).json({
-//             error: "Internal Server Error",
-//         });
-//     }
-// });
 
 export { routes };
