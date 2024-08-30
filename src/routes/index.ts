@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import { endRoutesController } from "../controllers";
 
 const router = Router();
@@ -8,11 +7,7 @@ router.get("/", (_, res) => {
     return res.send("Working Properly!");
 });
 
-router.post(
-    "/upload",
-    endRoutesController.uploadBodyValidator,
-    endRoutesController.upload
-);
+router.post("/upload", endRoutesController.uploadImage);
 
 router.get("/image/:id", (req, res) => {
     const image = Buffer.from(

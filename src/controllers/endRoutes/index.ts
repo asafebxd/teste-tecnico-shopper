@@ -1,4 +1,4 @@
-import * as endRoutes from "./Update";
+import * as endRoutes from "./Upload";
 
 export const endRoutesController = {
     ...endRoutes,
