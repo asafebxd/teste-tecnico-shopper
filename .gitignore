@@ -1,5 +1,6 @@
+/build
+/node_modules
+
+
 *.sqlite3
 .env
-
-/node_modules
-/build
