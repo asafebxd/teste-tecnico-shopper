@@ -4,54 +4,44 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY || "");
 
 const model = genAI.getGenerativeModel({
     // Choose a Gemini model.
-    model: "gemini-1.5-pro",
+    model: "gemini-pro-vision",
+    generationConfig: {
+        temperature: 0.4,
+        topP: 1,
+        topK: 32,
+        maxOutputTokens: 4096,
+    },
 });
 
-export const analyzeImage = async (imageBase64: string) => {
+export const analyzeImage = async (imageBase64: string): Promise<number> => {
     try {
-        const result = await model.generateContent([
-            {
-                inlineData: {
-                    mimeType: "image/png",
-                    data: imageBase64.replace(
-                        /^data:image\/(png|jpg|jpeg);base64,/,
-                        ""
-                    ),
+        const result = await model.generateContent({
+            contents: [
+                {
+                    role: "user",
+                    parts: [
+                        {
+                            inlineData: {
+                                mimeType: "image/jpeg",
+                                data: imageBase64.replace(
+                                    /^data:image\/(png|jpg|jpeg|webp);base64,/,
+                                    ""
+                                ),
+                            },
+                        },
+                        {
+                            text: "Retorne o valor do consumo atual. Retorne apenas o valor que esta na imagem, nao retorne nenhuma instrucao alem do valor numerico",
+                        },
+                    ],
                 },
-            },
-            {
-                text: `
-                Extract the following details from this meter image:
-                - image_link: The link to the uploaded image
-                - customer_code: located at "Cod. Cliente"
-                - measure_datetime: locatedat "Data da apresentacao" de "leitura atual"
-                - measure_type: indentify if the bill is (WATER or GAS)
-                - measure_value: located at "Leitura Atual m3" or "Consumo m3"
-                `,
-            },
-        ]);
+            ],
+        });
 
-        //Output the generated text to the console
-        console.log(result.response.text());
-
-        const measureValue = parseFloat(result.response.text());
+        const response = await result.response;
+        const measureValue = parseFloat(response.text());
         return measureValue;
-
-        // const parseResponse = (responseText: string) => {
-        //     const lines = responseText.split('\n').map(line => line.trim());
-        //     const extractedValues = {
-        //       image_link: lines.find(line => line.startsWith('image_link:'))?.split(': ')[1] || '',
-        //       customer_code: lines.find(line => line.startsWith('customer_code:'))?.split(': ')[1] || '',
-        //       measure_time: lines.find(line => line.startsWith('measure_time:'))?.split(': ')[1] || '',
-        //       measure_type: lines.find(line => line.startsWith('measure_type:'))?.split(': ')[1] || '',
-        //       measure_value: parseFloat(lines.find(line => line.startsWith('measure_value:'))?.split(': ')[1] || '0'),
-        //       measure_uuid: lines.find(line => line.startsWith('measure_uuid:'))?.split(': ')[1] || ''
-        //     };
-
-        //     ;
-        //   };
     } catch (error) {
-        console.error("Error integraring the google", error);
-        throw new Error("Error durring image process");
+        console.error("Error integraring the google", JSON.stringify(error));
+        return 0;
     }
 };

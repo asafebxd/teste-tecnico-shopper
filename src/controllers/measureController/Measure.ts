@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { Knex } from "../../database/knex";
@@ -34,8 +35,13 @@ export const getMeasure = async (req: Request, res: Response) => {
             });
         }
 
-        return res.status(StatusCodes.OK).json({ customer_code, measures });
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        return res.status(StatusCodes.OK).json({
+            customer_code,
+            measures: measures.map((measure) => ({
+                ...measure,
+                image_url: `/images/${measure.measure_uuid}`,
+            })),
+        });
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             error: "Error finding measure.",
